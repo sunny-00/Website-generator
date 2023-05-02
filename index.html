@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Editor</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous" />
+    <style>
+        #first-div {
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        #second-div {
+            padding-left: 0%;
+            padding-right: 0%;
+            overflow: hidden;
+            position: relative;
+        }
+        a {
+        text-decoration: none;
+        }
+
+        .myButton {
+          background-color:rgb(137, 134, 134);
+          color: rgb(255, 255, 255);
+          font-size: 16px;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          }
+
+        .myButton.clicked {
+           background-color:rgb(52, 52, 52)
+          }
+          .remove{
+            display:none
+        }
+        
+    </style>
+</head>
+
+<body>
+
+
+  <div class="container-fluid" id="parent" style="position: absolute;z-index: 9999; width: 100%;height: 100vh; overflow: hidden;">
+    <div class="row">
+        <div id="left" class="col-lg-6" style="background-color: black; width: 50%; height: 100vh;"></div>
+        <div id="right" class="col-lg-6" style="background-color: gray; width: 50%; height: 100vh;"></div>
+        <button class="btn btn-light" id="startbutton" style="position: absolute; z-index: 1; top: 50%; left: 50%; transform: translate(-50%, -50%); width: fit-content;" onclick="Start()">Start creating your own website</button>
+    </div>
+</div>
+
+
+<nav class="navbar bg-dark" data-bs-theme="dark">
+  <div class="container-fluid d-flex justify-content-center">
+    <button class="btn btn-secondary  justify-content-start" data-bs-toggle="collapse" data-bs-target="#first-div" type="button"  onclick="toggleSidebar()">Sidebar</button>
+    <a class="navbar-brand mx-auto" href="#"><b>Editor</b></a>
+    <button class="btn btn-secondary justify-content-end" onclick="showstart()">Back</button>
+  </div>
+</nav>
+
+    <div class="container-fluid bothdiv remove" id="bothdiv">
+
+        <div class="row">
+            <div id="first-div" class="col-sm-3 show" style="background-color: lightgray">
+                <hr />
+                <hr />
+                <h1 class="mt-2">Header</h1>
+                <div>
+                    <p>
+                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample" style="color:black">
+                          Add Navbar
+                        </a>
+                      </p>
+                      <div class="collapse" id="collapseExample">
+                        <div class="card card-body">
+                            <label for="navbarcolor">Nav Color</label>
+                            <input type="text" title="navbarcolor" id="navbarcolor" value="black">
+                            <label for="navbarcolor">Nav bar Height</label>
+                            <input type="number" title="navbarheight" id="navbarheight" min="20" value="40">
+                        </div>
+                        <br>
+                        <button class="btn btn-success addnavbar" id="addnavbar"  onclick="createNavbar(); remove('addnavbar')">Add</button>
+                        <button class="btn btn-danger remove removenavbar" id="removenavbar" onclick="navbarremove(); remove('removenavbar')">Remove</button>
+                        <hr>
+
+                        <div class="mt-2 remove"  id="navbarelement" >
+                            <p>
+                                <a class="btn btn-info " data-bs-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="false" aria-controls="collapseExample">
+                                  Add elments
+                                </a>
+                              </p>
+                              <div class="collapse" id="collapseExample1">
+                                <div class="card card-body">
+                                <label for="addelements">Elements</label>
+                                <input type="text" title="addelements" id="addelements" placeholder="Home,About-Us,Contact Us">
+                                <label for="elementcolor">Elements color</label>
+                                <input type="text" title="elementcolor" id="elementcolor" value="white">
+                                <label for="elementmargin">Margin</label>
+                                <input type="number" title="elementmargin" id="elementmargin" min="10" value="10">
+                                <label for="elementsize">Font-size</label>
+                                <input type="number" title="elementsize" id="elementsize" min="10" value="10">
+                                </div>
+                                <button class="btn btn-success createelementbutton" id="createelementbutton" onclick="createelement() ; removeelementbutton('createelementbutton')">Create</button>
+                                <button class="btn btn-danger remove removeelementbutton" id="removeelementbutton" onclick="removeelement() ; removeelementbutton('removeelementbutton')">Remove</button>
+                                <div class="btn-group mt-2" role="group" aria-label="Basic example">
+                                    <button type="button" class="btn btn-secondary" onclick="navbarelementsjustify('left')">Left</button>
+                                    <button type="button" class="btn btn-light" onclick="navbarelementsjustify('center')">Center</button>
+                                    <button type="button" class="btn btn-secondary" onclick="navbarelementsjustify('right')">Right</button>
+                                  </div>
+                              </div>
+                            </div> 
+                    </div>  
+                </div>
+                <hr><hr>
+                <div>
+                    <h1 class="mt-2">Body</h1>
+
+                    <p>
+                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExampletitle" role="button" aria-expanded="false" aria-controls="collapseExample">
+                          Title
+                        </a>
+                      </p>
+                      <div class="collapse" id="collapseExampletitle">
+                        <div class="card card-body">
+                            <label for="bodytitle">Title-Name</label>
+                            <input type="text" title="bodytitle" id="bodytitle">
+                            <label for="sizetitle">Size</label>
+                            <input type="number" title="sizetitle" id="sizetitle" min="10" value="20">
+                            <label for="colortitle">Title Color</label>
+                            <input type="text" title="colortitle" id="colortitle" value="black">
+                        </div>
+                        <br>
+                        <button class="btn btn-success" id="addtitlebutton" onclick="createtitle(); showtitlebutton('addtitlebutton')">Add</button>
+                        <button class="btn btn-danger remove" id="removetitlebutton" onclick="removetitle(); showtitlebutton('removetitlebutton')">Remove</button>
+                        <br>
+                        <br>
+                        <div class="remove movetitleshow" id="movetitleshow">
+                          <div>
+                            <button type="button" class="myButton bold" id="bold" onclick="toggleButton('bold')"> <b> B </b></button>
+                            <button type="button" class="myButton italic" id="italic" onclick="toggleButton('italic')"> <i> I </i></button>
+                            <button  type="button" class="myButton underline" id="underline"  onclick="toggleButton('underline')"> <u> U </u></button>
+                          </div>
+                        <p>
+                          <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExampletitlemove" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Move Title
+                          </a>
+                        </p>
+                        <div class="collapse" id="collapseExampletitlemove">
+                          <div class="card card-body">
+                            <label for="Righttitle">Left-Right</label>
+                            <input type="number" title="Righttitle" id="Righttitle">
+                            <label for="Uptitle">up-down</label>
+                            <input type="number" title="title" id="Uptitle">
+                        </div>
+                        <hr>               
+                        </div>
+                      </div>
+                      </div>
+                    <p>
+                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExamplemain" role="button" aria-expanded="false" aria-controls="collapseExample" style="color:black">
+                          Add image
+                        </a>
+                      </p>
+                      <div class="collapse" id="collapseExamplemain">
+                        <div class="card card-body">
+                            <label>Add Image <input type="file" name="myImage" id="mainImage" accept="image/png, image/gif, image/jpeg" /> </label>
+                            <label for="Imagesize">Image size</label>
+                            <input type="number" title="Imagesize" id="Imagesize" min="20" value="40">
+                        </div>
+                        <br>
+                        <button class="btn btn-success" onclick="createImage()">Add</button>
+                        <button class="btn btn-danger" onclick="removeImage()">Remove</button>
+                        <br>
+                        <br>
+                        <p>
+                            <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExamplemainmove" role="button" aria-expanded="false" aria-controls="collapseExample" style="color:black">
+                              Move image
+                            </a>
+                          </p>
+                          <div class="collapse" id="collapseExamplemainmove">
+                        <div class="card card-body">
+                            <button type="button" id="contentright" class="contentright" onclick="createImage(); contentbutton('contentright')">Content Right</button>
+                            <button type="button" id="contentno" class="contentno" onclick="createImage(); contentbutton('contentno')">No content</button>
+                            <button type="button" id="contentleft" class="contentleft" onclick="createImage(); contentbutton('contentleft')">Content Left</button>
+
+                            <label for="Right">Left-Right</label>
+                            <input type="number" title="Right" id="Right">
+                            <label for="Up">up-down</label>
+                            <input type="number" title="Up" id="Up">
+                        </div>
+                      </div>
+
+                </div>
+
+
+                <p>
+                  <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExamplepara" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    Paragraph
+                  </a>
+                </p>
+                <div class="collapse" id="collapseExamplepara">
+                  <div class="card card-body">
+                      <label for="bodypara">Paragraph</label>
+                      <input type="text" title="bodypara" id="bodypara">
+                      <label for="sizepara">Size</label>
+                      <input type="number" title="sizepara" id="sizepara" min="10" value="20">
+                      <label for="colorpara">Title Color</label>
+                      <input type="text" title="colorpara" id="colorpara" value="black">
+                  </div>
+                  <br>
+                  <button class="btn btn-success" id="addparabutton" onclick="createpara(); showparabutton('addparabutton')">Add</button>
+                  <button class="btn btn-danger remove" id="removeparabutton" onclick="removepara(); showparabutton('removeparabutton')">Remove</button>
+                  <br>
+                  <br>
+                  <div class="remove moveparashow" id="moveparashow">
+                  <p>
+                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExampleparaemove" role="button" aria-expanded="false" aria-controls="collapseExample">
+                      Move Para
+                    </a>
+                  </p>
+                  <div class="collapse" id="collapseExampleparaemove">
+                    <div class="card card-body">
+                      <label for="Rightpara">Left-Right</label>
+                      <input type="number" title="Rightpara" id="Rightpara">
+                      <label for="Uppara">up-down</label>
+                      <input type="number" title="Uppara" id="Uppara">
+                  </div>
+                  <hr>               
+                  </div>
+                </div>
+                </div>
+
+
+
+                </div>
+
+                <hr><hr>
+
+                <div>
+                    <h1 class="mt-2">Footer</h1>
+                    <p>
+                        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseExamplefoot" role="button" aria-expanded="false" aria-controls="collapseExample" style="color:black">
+                          Add Footer
+                        </a>
+                      </p>
+                      <div class="collapse" id="collapseExamplefoot">
+                        <div class="card card-body">
+                            <label for="footercolor">Footer Color</label>
+                            <input type="text" title="footercolor" id="footercolor" value="black">
+                            <label for="footerheight">Footer Height</label>
+                            <input type="number" title="footerheight" id="footerheight" min="20" value="80">
+                        </div>
+                        <br>
+                        
+                        <button class="btn btn-success addfooter" id="addfooter" onclick="createfooter(); showfooter('addfooter')">Add</button>
+                        <button class="btn btn-danger remove removefooter" id="removefooter" onclick="footerremove() ; showfooter('removefooter')">Remove</button>
+                </div>
+            </div>
+            </div>
+
+            <div id="second-div" class="col-sm-9 d-flex align-items-start flex-column mb-3 " style="border: 1px black solid; height: 90vh;">
+                <div id="navbardiv" class="col-sm-12 p-2 mb-auto"></div>
+                <div id="main" class="col-sm-12 p-2"></div>
+                <div id="footerdiv" class="col-sm-12 d-flex mt-auto p-2"></div>
+            </div>
+
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+        crossorigin="anonymous"></script>
+    <script src="./index.js"></script>
+</body>
+
+</html>
