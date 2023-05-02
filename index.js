@@ -1,10 +1,8 @@
 desktopWidth = 577;
 isMobile = window.matchMedia(`(max-width: ${desktopWidth - 1}px)`).matches;
 if (isMobile) {
-  var result = confirm('For optimal viewing experience, please turn on desktop site mode. Do you want to switch to desktop mode?');
-  if (result) {
-    window.location.href = "https://sunny-00.github.io/Website-generator/desktop";
-  }
+  alert('For optimal viewing experience, please turn on desktop site mode');
+  desktopWidth=599;
 }
 
 
