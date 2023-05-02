@@ -1,7 +1,7 @@
 
 desktopWidth = 577;
 isMobile = window.matchMedia(`(max-width: ${desktopWidth - 1}px)`).matches;
-while (isMobile) {
+if (isMobile) {
   alert('For optimal viewing experience, please turn on desktop site mode');
   console.log(alert);
 }
