@@ -4,6 +4,7 @@ isMobile = window.matchMedia(`(max-width: ${desktopWidth - 1}px)`).matches;
 if (isMobile) {
   alert('For optimal viewing experience, please turn on desktop site mode');
   console.log(alert);
+  break;
 }
 
 
